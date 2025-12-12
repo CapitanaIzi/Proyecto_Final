@@ -1,12 +1,25 @@
+import jwt from "jsonwebtoken";
+
 export const loginUserService = async (email, password) => {
-  const validUser = {
-    email: "test@test.com",
-    password: "123456"
+  const user = {
+    id: 1,
+    email: "admin@mail.com",
+    password: "1234",
+    role: "admin"
   };
 
-  if (email === validUser.email && password === validUser.password) {
-    return { token: "TOKEN-DE-EJEMPLO" };
+  if (email !== user.email || password !== user.password) {
+    throw new Error("Credenciales inválidas");
   }
 
-  throw new Error("Credenciales inválidas");
+  const token = jwt.sign(
+    { id: user.id, email: user.email, role: user.role },
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRES_IN }
+  );
+
+  return {
+    message: "Login exitoso",
+    token
+  };
 };
