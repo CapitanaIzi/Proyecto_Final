@@ -3,13 +3,18 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import errorRoutes from "./routes/errors.routes.js";
+import productRoutes from "./routes/products.routes.js";
+import authRoutes from "./routes/auth.routes.js";
+
 
 dotenv.config();
 const app = express();
 
 app.use(express.json()); 
-app.use(cors());             // CORS habilitado
+app.use(cors());
 app.use(bodyParser.json()); 
+app.use("/api/products", productRoutes);
+app.use("/auth", authRoutes);
 
 const PORT = process.env.PORT || 3000;
 
