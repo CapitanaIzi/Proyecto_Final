@@ -1,8 +1,15 @@
 import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import dotenv from "dotenv";
 import errorRoutes from "./routes/errors.routes.js";
 
+dotenv.config();
 const app = express();
-app.use(express.json());
+
+app.use(express.json()); 
+app.use(cors());             // CORS habilitado
+app.use(bodyParser.json()); 
 
 const PORT = process.env.PORT || 3000;
 
