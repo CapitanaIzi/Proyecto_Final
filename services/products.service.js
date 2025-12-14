@@ -1,26 +1,26 @@
-let mockProducts = [
-  { id: 1, name: "Producto A", price: 100 },
-  { id: 2, name: "Producto B", price: 200 }
-];
+import {
+  getAllProductsModel,
+  getProductByIdModel,
+  createProductModel,
+  deleteProductModel
+} from "../models/products.model.js";
 
 export const getAllProductsService = async () => {
-  return mockProducts;
+  return await getAllProductsModel();
 };
 
 export const getProductByIdService = async (id) => {
-  const product = mockProducts.find(p => p.id == id);
-  if (!product) throw new Error("Producto no encontrado");
-  return product;
+  return await getProductByIdModel(id);
 };
 
 export const createProductService = async (data) => {
-  const newProduct = { id: Date.now(), ...data };
-  mockProducts.push(newProduct);
-  return newProduct;
+  if (!data.name || !data.price || data.stock === undefined) {
+    throw new Error("Datos incompletos");
+  }
+
+  return await createProductModel(data);
 };
 
 export const deleteProductService = async (id) => {
-  const index = mockProducts.findIndex(p => p.id == id);
-  if (index === -1) throw new Error("Producto no encontrado");
-  return mockProducts.splice(index, 1)[0];
+  return await deleteProductModel(id);
 };

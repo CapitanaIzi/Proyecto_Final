@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 export const loginUserService = async (email, password) => {
   const user = {
     id: 1,
-    email: "admin@mail.com",
-    password: "1234",
+    email: "admin@admin.com",
+    password: "123456",
     role: "admin"
   };
 

@@ -15,7 +15,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use("/auth", authRoutes);
-app.use("/api", productsRoutes);   
+app.use("/api/products", productsRoutes);
 app.use("/errors", errorsRoutes);
 
 app.use(notFoundMiddleware);
